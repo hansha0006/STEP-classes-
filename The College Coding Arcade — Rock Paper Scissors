@@ -1,0 +1,58 @@
+import java.util.*;
+
+class RockPaperScissors {
+
+    static String playRound(String player, String computer) {
+
+        if (player.equalsIgnoreCase(computer))
+            return "Draw";
+
+        if ((player.equalsIgnoreCase("Rock") && computer.equals("Scissors")) ||
+            (player.equalsIgnoreCase("Paper") && computer.equals("Rock")) ||
+            (player.equalsIgnoreCase("Scissors") && computer.equals("Paper")))
+            return "Player Wins";
+
+        return "Computer Wins";
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        Random r = new Random();
+
+        String[] moves = {"Rock", "Paper", "Scissors"};
+
+        int wins = 0, losses = 0, draws = 0;
+
+        System.out.println("Round | Player | Computer | Result");
+
+        for (int i = 1; i <= 5; i++) {
+
+            System.out.print("Enter Rock/Paper/Scissors: ");
+            String player = sc.next();
+
+            String computer = moves[r.nextInt(3)];
+
+            String result = playRound(player, computer);
+
+            System.out.println(i + " | " + player + " | "
+                    + computer + " | " + result);
+
+            if (result.equals("Player Wins"))
+                wins++;
+            else if (result.equals("Computer Wins"))
+                losses++;
+            else
+                draws++;
+        }
+
+        double percentage = (wins * 100.0) / 5;
+
+        System.out.println("\nWins: " + wins);
+        System.out.println("Losses: " + losses);
+        System.out.println("Draws: " + draws);
+        System.out.println("Win % = " + percentage + "%");
+
+        sc.close();
+    }
+}
